@@ -63,7 +63,7 @@ const TeamLeadersPage = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const { data } = await axios.get<User[]>('https://manzi897098.pythonanywhere.com/api/users', {
+      const { data } = await axios.get<User[]>('https://yvantrey.pythonanywhere.com/api/users', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTeamLeaders(data.filter(user => user.role === "TeamLeader"));
@@ -83,7 +83,7 @@ const TeamLeadersPage = () => {
     try {
       const token = localStorage.getItem('token');
       const { data } = await axios.post<User>(
-        'https://manzi897098.pythonanywhere.com/api/users',
+        'https://yvantrey.pythonanywhere.com/api/users',
         { ...formData, role: 'TeamLeader' },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -121,7 +121,7 @@ const TeamLeadersPage = () => {
       };
 
       const { data } = await axios.put<any>(
-        `https://manzi897098.pythonanywhere.com/api/users/${userId}`,
+        `https://yvantrey.pythonanywhere.com/api/users/${userId}`,
         formattedData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -176,7 +176,7 @@ const TeamLeadersPage = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`https://manzi897098.pythonanywhere.com/api/users/${selectedUser.id}`, {
+      await axios.delete(`https://yvantrey.pythonanywhere.com/api/users/${selectedUser.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -218,7 +218,7 @@ const TeamLeadersPage = () => {
       };
 
       const { data } = await axios.put<any>(
-        `https://manzi897098.pythonanywhere.com/api/users/${user.id}`,
+        `https://yvantrey.pythonanywhere.com/api/users/${user.id}`,
         formattedData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -269,7 +269,7 @@ const TeamLeadersPage = () => {
   className="sm:w-auto w-full ml-2"
   onClick={async () => {
     const token = localStorage.getItem('token');
-    const res = await fetch('https://manzi897098.pythonanywhere.com/api/admin/export-team-leaders-pdf', {
+    const res = await fetch('https://yvantrey.pythonanywhere.com/api/admin/export-team-leaders-pdf', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {

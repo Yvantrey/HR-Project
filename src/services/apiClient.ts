@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 // Use environment variable if available, otherwise fall back to default
-const API_URL = import.meta.env.VITE_API_URL || 'https://manzi897098.pythonanywhere.com/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://yvantrey.pythonanywhere.com/api';
 
 const apiClient = axios.create({
   baseURL: API_URL,

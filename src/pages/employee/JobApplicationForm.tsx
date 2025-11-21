@@ -41,7 +41,7 @@ export default function JobApplicationForm() {
 
     const token = localStorage.getItem('token');
     try {
-      await axios.post('https://manzi897098.pythonanywhere.com/api/job-applications', formData, {
+      await axios.post('https://yvantrey.pythonanywhere.com/api/job-applications', formData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'

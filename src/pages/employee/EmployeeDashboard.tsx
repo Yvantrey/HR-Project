@@ -7,7 +7,7 @@ import { FileText, BookOpen, BriefcaseBusiness, CheckCircle2, Clock } from "luci
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
 
-const API_URL = 'https://manzi897098.pythonanywhere.com/api';
+const API_URL = 'https://yvantrey.pythonanywhere.com/api';
 
 interface DashboardData {
   department: string;

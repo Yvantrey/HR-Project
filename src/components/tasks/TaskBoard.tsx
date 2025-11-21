@@ -19,8 +19,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-
-const API_URL = 'https://manzi897098.pythonanywhere.com/api';
+import { API_URL } from "@/lib/constants";
 
 const taskFormSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
@@ -267,7 +266,7 @@ export function TaskBoard({ tasks, teamMembers, canEdit = false, onEdit, onDelet
                 variant="outline"
                 size="sm"
                 onClick={() => {
-                  const url = `https://manzi897098.pythonanywhere.com${task.document_url}`;
+                  const url = `https://yvantrey.pythonanywhere.com${task.document_url}`;
                   window.open(url, '_blank');
                 }}
                 className="w-full justify-start"
@@ -315,7 +314,7 @@ export function TaskBoard({ tasks, teamMembers, canEdit = false, onEdit, onDelet
           variant="outline"
           onClick={async () => {
             const token = localStorage.getItem('token');
-            const res = await fetch('https://manzi897098.pythonanywhere.com/api/team-leader/export-tasks-pdf', {
+            const res = await fetch('https://yvantrey.pythonanywhere.com/api/team-leader/export-tasks-pdf', {
               headers: { 'Authorization': `Bearer ${token}` }
             });
             if (res.ok) {

@@ -51,7 +51,7 @@ const NotificationsPage = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const { data } = await axios.get<Notification[]>('https://manzi897098.pythonanywhere.com/api/notifications', {
+      const { data } = await axios.get<Notification[]>('https://yvantrey.pythonanywhere.com/api/notifications', {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -93,7 +93,7 @@ const NotificationsPage = () => {
       };
 
       await axios.post(
-        'https://manzi897098.pythonanywhere.com/api/notifications',
+        'https://yvantrey.pythonanywhere.com/api/notifications',
         notificationData,
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -132,7 +132,7 @@ const NotificationsPage = () => {
     if (selectedNotification) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`https://manzi897098.pythonanywhere.com/api/notifications/${selectedNotification}`, {
+        await axios.delete(`https://yvantrey.pythonanywhere.com/api/notifications/${selectedNotification}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 

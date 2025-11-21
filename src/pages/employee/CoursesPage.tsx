@@ -15,7 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://manzi897098.pythonanywhere.com';
+const API_URL = import.meta.env.VITE_API_URL || 'https://yvantrey.pythonanywhere.com';
 
 export default function CoursesPage() {
   const { currentUser, courses, enrollInCourse } = useAppContext();

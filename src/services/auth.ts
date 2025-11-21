@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { Department, UserRole } from '@/types';
 
-const API_URL = 'https://manzi897098.pythonanywhere.com/api';
+const API_URL = 'https://yvantrey.pythonanywhere.com/api';
 
 export interface LoginResponse {
   token: string;

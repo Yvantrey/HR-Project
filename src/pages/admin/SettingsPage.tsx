@@ -114,7 +114,7 @@ const SettingsPage = () => {
     try {
       const token = localStorage.getItem('token');
       const { data } = await axios.put<UpdateProfileResponse>(
-        `https://manzi897098.pythonanywhere.com/api/users/${currentUser.id}`,
+        `https://yvantrey.pythonanywhere.com/api/users/${currentUser.id}`,
         values,
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -146,7 +146,7 @@ const SettingsPage = () => {
     try {
       const token = localStorage.getItem('token');
       const { data } = await axios.put<UpdatePasswordResponse>(
-        `https://manzi897098.pythonanywhere.com/api/users/${currentUser.id}/password`,
+        `https://yvantrey.pythonanywhere.com/api/users/${currentUser.id}/password`,
         {
           currentPassword: values.currentPassword,
           newPassword: values.newPassword,
@@ -183,7 +183,7 @@ const SettingsPage = () => {
     try {
       const token = localStorage.getItem('token');
       const { data } = await axios.delete<DeleteAccountResponse>(
-        `https://manzi897098.pythonanywhere.com/api/users/${currentUser.id}`,
+        `https://yvantrey.pythonanywhere.com/api/users/${currentUser.id}`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }

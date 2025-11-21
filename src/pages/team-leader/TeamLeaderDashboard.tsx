@@ -6,7 +6,7 @@ import { BarChart, PieChart, Bar, Pie, XAxis, YAxis, CartesianGrid, Tooltip, Leg
 import { FileText, BookOpen, Send, Award } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
-const API_URL = 'https://manzi897098.pythonanywhere.com/api';
+const API_URL = 'https://yvantrey.pythonanywhere.com/api';
 
 interface DashboardData {
   department: string;

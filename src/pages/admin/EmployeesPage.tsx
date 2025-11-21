@@ -66,7 +66,7 @@ const EmployeesPage = () => {
   const fetchEmployees = async () => {
     try {
       const token = localStorage.getItem('token');
-      const { data } = await axios.get<any[]>('https://manzi897098.pythonanywhere.com/api/users', {
+      const { data } = await axios.get<any[]>('https://yvantrey.pythonanywhere.com/api/users', {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -131,7 +131,7 @@ const EmployeesPage = () => {
       };
 
       const { data } = await axios.post<any>(
-        'https://manzi897098.pythonanywhere.com/api/users',
+        'https://yvantrey.pythonanywhere.com/api/users',
         formattedData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -186,7 +186,7 @@ const EmployeesPage = () => {
       };
 
       const response = await axios.put<any>(
-        `https://manzi897098.pythonanywhere.com/api/users/${userId}`,
+        `https://yvantrey.pythonanywhere.com/api/users/${userId}`,
         formattedData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -260,7 +260,7 @@ const EmployeesPage = () => {
     if (selectedUser) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`https://manzi897098.pythonanywhere.com/api/users/${selectedUser.id}`, {
+        await axios.delete(`https://yvantrey.pythonanywhere.com/api/users/${selectedUser.id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -312,7 +312,7 @@ const EmployeesPage = () => {
       };
 
       const { data } = await axios.put<any>(
-        `https://manzi897098.pythonanywhere.com/api/users/${updatedUser.id}`,
+        `https://yvantrey.pythonanywhere.com/api/users/${updatedUser.id}`,
         formattedData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -356,7 +356,7 @@ const EmployeesPage = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `https://manzi897098.pythonanywhere.com/api/users/${skillDialogUser.id}/promote-skill`,
+        `https://yvantrey.pythonanywhere.com/api/users/${skillDialogUser.id}/promote-skill`,
         { skillLevel: values.skillLevel },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -375,7 +375,7 @@ const EmployeesPage = () => {
       setIsCvDialogOpen(true);
       
       const token = localStorage.getItem('token');
-      const response = await axios.get(`https://manzi897098.pythonanywhere.com/api/users/${user.id}/cv`, {
+      const response = await axios.get(`https://yvantrey.pythonanywhere.com/api/users/${user.id}/cv`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -401,7 +401,7 @@ const EmployeesPage = () => {
   };
 
   const handleDownloadCv = (cvUrl: string, employeeName: string) => {
-    const fullUrl = `https://manzi897098.pythonanywhere.com${cvUrl}`;
+    const fullUrl = `https://yvantrey.pythonanywhere.com${cvUrl}`;
     const link = document.createElement('a');
     link.href = fullUrl;
     link.download = `${employeeName}_CV.pdf`;
@@ -413,7 +413,7 @@ const EmployeesPage = () => {
   const handleGenerateReport = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://manzi897098.pythonanywhere.com/api/admin/export-employee-report-pdf', {
+      const response = await fetch('https://yvantrey.pythonanywhere.com/api/admin/export-employee-report-pdf', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -464,7 +464,7 @@ const EmployeesPage = () => {
             className="sm:w-auto w-full ml-2"
             onClick={async () => {
               const token = localStorage.getItem('token');
-              const res = await fetch('https://manzi897098.pythonanywhere.com/api/admin/export-employees-pdf', {
+              const res = await fetch('https://yvantrey.pythonanywhere.com/api/admin/export-employees-pdf', {
                 headers: { 'Authorization': `Bearer ${token}` }
               });
               if (res.ok) {

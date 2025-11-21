@@ -208,7 +208,7 @@ This guide covers deploying both the frontend (React/Vite) and backend (Flask) c
 
 5. **Update apiClient.ts:**
    ```typescript
-   const API_URL = import.meta.env.VITE_API_URL || 'https://manzi897098.pythonanywhere.com/api';
+   const API_URL = import.meta.env.VITE_API_URL || 'https://yvantrey.pythonanywhere.com/api';
    ```
 
 6. **Redeploy** after changes

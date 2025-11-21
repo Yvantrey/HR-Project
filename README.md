@@ -46,7 +46,7 @@ Ascent Employee Bridge is a comprehensive HR management platform designed to str
    ```bash
    python server.py
    ```
-   The backend will run on `https://manzi897098.pythonanywhere.com` by default.
+   The backend will run on `https://yvantrey.pythonanywhere.com` by default.
 
 ### Frontend Setup
 1. **Navigate to the frontend directory:**

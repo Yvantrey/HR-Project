@@ -15,7 +15,6 @@ from fpdf import FPDF
 import io
 import traceback
 from decimal import Decimal
-from werkzeug.utils import secure_filename
 import time
 
 # Configure logging
@@ -63,17 +62,22 @@ def after_request(response):
 def job_opportunities_options():
     return '', 200
 
-CV_UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads', 'cvs')
-os.makedirs(CV_UPLOAD_FOLDER, exist_ok=True)
+# Create upload folders with error handling
+try:
+    CV_UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads', 'cvs')
+    os.makedirs(CV_UPLOAD_FOLDER, exist_ok=True)
 
-QUIZ_SUBMISSION_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads', 'quiz_submissions')
-os.makedirs(QUIZ_SUBMISSION_FOLDER, exist_ok=True)
+    QUIZ_SUBMISSION_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads', 'quiz_submissions')
+    os.makedirs(QUIZ_SUBMISSION_FOLDER, exist_ok=True)
 
-QUIZ_UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads', 'quizzes')
-os.makedirs(QUIZ_UPLOAD_FOLDER, exist_ok=True)
+    QUIZ_UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads', 'quizzes')
+    os.makedirs(QUIZ_UPLOAD_FOLDER, exist_ok=True)
 
-TASK_DOCUMENTS_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads', 'task_documents')
-os.makedirs(TASK_DOCUMENTS_FOLDER, exist_ok=True)
+    TASK_DOCUMENTS_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads', 'task_documents')
+    os.makedirs(TASK_DOCUMENTS_FOLDER, exist_ok=True)
+except Exception as e:
+    logger.error(f"Error creating upload folders: {str(e)}")
+    raise
 
 # # Database configuration
 # db_config = {
@@ -87,10 +91,10 @@ os.makedirs(TASK_DOCUMENTS_FOLDER, exist_ok=True)
 
 # Database configuration
 db_config = {
-    'host': os.getenv('DB_HOST', 'manzi897098.mysql.pythonanywhere-services.com'),
-    'user': os.getenv('DB_USER', 'manzi897098'),
-    'password': os.getenv('DB_PASSWORD', 'Sars1212@1220120'),
-    'database': os.getenv('DB_NAME', 'manzi897098$default'),
+    'host': os.getenv('DB_HOST', 'yvantrey.mysql.pythonanywhere-services.com'),
+    'user': os.getenv('DB_USER', 'yvantrey'),
+    'password': os.getenv('DB_PASSWORD', ''),
+    'database': os.getenv('DB_NAME', 'yvantrey$default'),
     'port': int(os.getenv('DB_PORT', 3306))
 }
 
@@ -99,9 +103,13 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'x7k9p2m4q8v5n3j6h1t0r2y5u8w3
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET', 'hr_management_jwt_secret_key_2024_secure')
 
 # Add this after your app initialization
-UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
+try:
+    UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
+except Exception as e:
+    logger.error(f"Error creating upload folder: {str(e)}")
+    raise
 
 
 # Print JWT secret for reference
@@ -114,6 +122,7 @@ def get_db_connection():
         return conn
     except Exception as e:
         logger.error(f"Database connection error: {str(e)}")
+        logger.error(f"Database config: host={db_config['host']}, user={db_config['user']}, database={db_config['database']}")
         raise
 
 def token_required(f):
@@ -160,6 +169,38 @@ def token_required(f):
 
 #         return jsonify({f"There is a database error: {str(error)}"})
 #         raise
+
+@app.route('/', methods=['GET'])
+def root():
+    """Root endpoint - API server is running"""
+    return jsonify({
+        'message': 'HR Management API Server',
+        'status': 'running',
+        'endpoints': {
+            'health': '/api/health',
+            'login': '/api/auth/login',
+            'docs': 'This is a backend API server. Use API endpoints starting with /api/'
+        }
+    }), 200
+
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    """Health check endpoint to verify server is running"""
+    try:
+        # Test database connection
+        conn = get_db_connection()
+        conn.close()
+        return jsonify({
+            'status': 'healthy',
+            'database': 'connected',
+            'message': 'Server is running correctly'
+        }), 200
+    except Exception as e:
+        return jsonify({
+            'status': 'unhealthy',
+            'database': 'disconnected',
+            'error': str(e)
+        }), 500
 
 @app.route('/api/auth/login', methods=['POST'])
 def login():

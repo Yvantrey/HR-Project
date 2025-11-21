@@ -22,7 +22,7 @@ export default function JobApplicationsPage() {
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
-      const res = await axios.get('https://manzi897098.pythonanywhere.com/api/job-applications', {
+      const res = await axios.get('https://yvantrey.pythonanywhere.com/api/job-applications', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setApplications(res.data);
@@ -68,7 +68,7 @@ export default function JobApplicationsPage() {
                       <TableCell>{app.job_title}</TableCell>
                       <TableCell className="max-w-xs truncate" title={app.cover_letter}>{app.cover_letter}</TableCell>
                       <TableCell>
-                        <a href={`https://manzi897098.pythonanywhere.com${app.cv_url}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Download CV</a>
+                        <a href={`https://yvantrey.pythonanywhere.com${app.cv_url}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Download CV</a>
                       </TableCell>
                       <TableCell>
                         <Badge className={statusColor(app.status)}>{app.status}</Badge>
