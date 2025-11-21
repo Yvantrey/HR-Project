@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 215 38% 96%;
+    --foreground: 234 28% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 234 28% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 234 28% 18%;
+
+    --primary: 258 85% 62%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 199 79% 92%;
+    --secondary-foreground: 231 35% 18%;
+
+    --muted: 214 32% 92%;
+    --muted-foreground: 231 15% 40%;
+
+    --accent: 168 83% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 3 89% 58%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 16% 88%;
+    --input: 220 16% 88%;
+    --ring: 258 85% 62%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 212 36% 96%;
+    --sidebar-foreground: 228 28% 25%;
+    --sidebar-primary: 258 85% 62%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 229 52% 90%;
+    --sidebar-accent-foreground: 228 28% 25%;
+    --sidebar-border: 220 16% 88%;
+    --sidebar-ring: 258 85% 62%;
+  }
+
+  .dark {
+    --background: 230 60% 6%;
+    --foreground: 214 32% 92%;
+
+    --card: 230 50% 9%;
+    --card-foreground: 214 32% 92%;
+
+    --popover: 228 53% 7%;
+    --popover-foreground: 214 32% 92%;
+
+    --primary: 271 91% 72%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 32% 16%;
+    --secondary-foreground: 214 32% 92%;
+
+    --muted: 222 30% 18%;
+    --muted-foreground: 217 20% 72%;
+
+    --accent: 163 70% 45%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 70% 48%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 218 22% 21%;
+    --input: 218 22% 21%;
+    --ring: 271 91% 72%;
+
+    --sidebar-background: 230 50% 9%;
+    --sidebar-foreground: 214 32% 92%;
+    --sidebar-primary: 271 91% 72%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 235 30% 18%;
+    --sidebar-accent-foreground: 214 32% 92%;
+    --sidebar-border: 228 24% 20%;
+    --sidebar-ring: 271 91% 72%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply min-h-screen bg-background text-foreground antialiased;
+    font-family: "Inter", "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(92, 167, 255, 0.35), transparent 45%),
+      radial-gradient(circle at 80% 0%, rgba(255, 165, 245, 0.25), transparent 35%),
+      linear-gradient(135deg, #f8fbff 0%, #f0f4ff 35%, #f9f6ff 70%, #fdf5ff 100%);
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.45), transparent 40%),
+      radial-gradient(circle at 80% 0%, rgba(14, 165, 233, 0.35), transparent 35%),
+      radial-gradient(circle at 50% 80%, rgba(248, 113, 113, 0.15), transparent 40%),
+      linear-gradient(180deg, #020617 0%, #020b1f 60%, #010511 100%);
+  }
+}
+
+@layer components {
+  .app-shell {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .app-shell::before,
+  .app-shell::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+  }
+
+  .app-shell::before {
+    background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.25), transparent 40%),
+      radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.22), transparent 35%);
+  }
+
+  .app-shell::after {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 0);
+    background-size: 120px 120px;
+    opacity: 0.35;
+    mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.5), transparent 70%);
+  }
+
+  .glass-panel {
+    @apply border border-white/30 bg-white/70 backdrop-blur-2xl shadow-[0_20px_60px_rgba(15,23,42,0.15)];
+  }
+
+  .dark .glass-panel {
+    @apply border-white/5 bg-slate-900/70 shadow-[0_20px_60px_rgba(0,0,0,0.45)];
+  }
+
+  .section-title {
+    font-family: "Space Grotesk", "Inter", sans-serif;
+    letter-spacing: -0.02em;
+  }
+}

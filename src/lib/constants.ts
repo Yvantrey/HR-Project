@@ -1,0 +1,1 @@
+export const API_URL = 'https://manzi897098.pythonanywhere.com/api'; 
