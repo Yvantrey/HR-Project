@@ -91,10 +91,10 @@ except Exception as e:
 
 # Database configuration
 db_config = {
-    'host': os.getenv('DB_HOST', 'yvantrey.mysql.pythonanywhere-services.com'),
-    'user': os.getenv('DB_USER', 'yvantrey'),
-    'password': os.getenv('DB_PASSWORD', ''),
-    'database': os.getenv('DB_NAME', 'yvantrey$default'),
+    'host': os.getenv('DB_HOST', 'localhost'),  # PythonAnywhere MySQL is usually on localhost
+    'user': os.getenv('DB_USER', 'YvanTrey'),   # Use your actual PythonAnywhere username
+    'password': os.getenv('DB_PASSWORD', ''),   # Set in .env file
+    'database': os.getenv('DB_NAME', 'YvanTrey$default'),  # Use your actual database name
     'port': int(os.getenv('DB_PORT', 3306))
 }
 
