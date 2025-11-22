@@ -266,30 +266,35 @@ def login():
         return jsonify({
             'token': token,
             'user': {
-                'id': str(user['id']),
+                'id': user['id'],  # Keep as number, not string
                 'name': user['name'],
                 'email': user['email'],
                 'role': user['role'],
                 'department': department,
-                'phoneNumber': user['phone_number'] or '',
+                'phone_number': user['phone_number'] or '',
                 'experience': user['experience'],
-                'experienceLevel': user['experience_level'],
+                'experience_level': user['experience_level'],
                 'description': user['description'],
-                'profileImage': user['profile_image_url'],
-                'isActive': bool(user['is_active']),
-                'passwordHash': user['password_hash']  # Add hash for frontend display
+                'profile_image_url': user['profile_image_url'],
+                'is_active': bool(user['is_active'])
             },
             'redirect': redirect_url
         })
 
     except Exception as e:
         logger.error(f"Login error: {str(e)}")
-        return jsonify({'message': 'An error occurred during login'}), 500
+        logger.error(f"Login error traceback: {traceback.format_exc()}")
+        return jsonify({
+            'message': 'An error occurred during login',
+            'error': str(e)
+        }), 500
 
     finally:
         try:
-            cursor.close()
-            conn.close()
+            if 'cursor' in locals():
+                cursor.close()
+            if 'conn' in locals():
+                conn.close()
         except:
             pass
 

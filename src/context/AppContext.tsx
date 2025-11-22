@@ -187,12 +187,32 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       });
       
       return { success: true, redirect: response.redirect };
-    } catch (error) {
-    toast({
-      title: "Login failed",
-      description: "Invalid email or password",
-      variant: "destructive",
-    });
+    } catch (error: any) {
+      console.error('Login error details:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        url: error.config?.url,
+      });
+      
+      let errorMessage = "Invalid email or password";
+      if (error.response?.status === 0 || error.code === 'ERR_NETWORK') {
+        errorMessage = "Cannot connect to server. Please check your connection.";
+      } else if (error.response?.status === 401) {
+        errorMessage = "Invalid email or password";
+      } else if (error.response?.status === 403) {
+        errorMessage = "Access forbidden. Please contact administrator.";
+      } else if (error.response?.status >= 500) {
+        errorMessage = "Server error. Please try again later.";
+      } else if (error.message?.includes('CORS')) {
+        errorMessage = "CORS error. Please check backend configuration.";
+      }
+      
+      toast({
+        title: "Login failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
       return { success: false };
     }
   };
